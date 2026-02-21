@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="hero" class="hidden">
+        <div class="photo-container">
+            <img src="fotojj.jpeg" alt="My Love">
+        </div>
+        <h1 class="title">Happy Birthday</h1>
+    </section>
+
+    <section id="letter-section">
+        <div class="parchment hidden">
+            <img src="tinta.png" class="ink-splatter" alt="Ink">
+            
+            <p class="message hidden">
+                Right on this day, you turn twenty. <br><br>
+                Can’t believe it, Jean, who used to do those little “guess the squishy” giveaways, is now officially in the big two-zero era.
+
+                Even though physically I’m not there next to you, I hope these words land as if you’re hearing them straight from my mouth. I genuinely pray that overwhelming happiness pours into your life like heavy rain. I hope every challenge and every moment of confusion you face becomes something you conquer with ease. I hope every good thing this world has to offer somehow finds its way to your side.
+                
+                And I also want to say I’m truly sorry if lately I’ve seemed distant, like I don’t care. Deep down, you already know the reason (gotta keep it halal, ukhtie).
+                
+                Also, forgive the late birthday gift, it’s still in process, coming soon, no worries.
+                
+                Anyway… I’m praying for nothing but the best for your life, and for the lives of the people you love most.
+            </p>
+            <p class="message hidden">
+                Every second spent with you feels like writing a piece of history that time could never erase. Today’s your special day, and I hope your smile shines a little brighter than it ever has before.
+            </p>
+            
+            <img src="wax.png" class="wax-seal hidden" alt="Wax Seal">
+        </div>
+    </section>
+
+    <section id="teaser" class="hidden">
+        <h2 class="teaser-text">The Book of You Chapt<span class="blink">-</span></h2>
+    </section>
+    <button id="music-btn">🎵 Play Music</button>
+    <audio id="bg-music" loop>
+        <source src="My One And Only Love.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        // 1. Bikin "Radar" buat mantau layar
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                // Kalau elemen udah masuk ke layar
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    
+                    // (Opsional) Biar animasinya cuma jalan sekali pas pertama kali discroll
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.15 // Elemen mulai muncul pas 15% bagiannya keliatan di layar
+        });
+
+        // 2. Animasi biasa buat elemen yang cuma butuh muncul (Foto, Judul, Teaser, Perkamen)
+        const basicHiddenElements = document.querySelectorAll('.hidden:not(.message):not(.wax-seal)');
+        basicHiddenElements.forEach((el) => observer.observe(el));
+
+        // 3. Animasi Berurutan buat Teks Surat
+        const messages = document.querySelectorAll('.message');
+        messages.forEach((msg, index) => {
+            // Kasih jeda waktu muncul (0.8 detik per paragraf)
+            msg.style.transitionDelay = `${index * 0.8}s`; 
+            observer.observe(msg);
+        });
+
+        // 4. Animasi Segel Lilin (Muncul Paling Terakhir)
+        const seal = document.querySelector('.wax-seal');
+        if (seal) {
+            // Segel muncul setelah semua paragraf selesai muncul
+            seal.style.transitionDelay = `${messages.length * 0.8}s`;
+            observer.observe(seal);
+        }
+        // 5. Fungsi buat Nyalain/Matiin Lagu
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.innerHTML = '🎵 Play Music';
+            } else {
+                bgMusic.play();
+                musicBtn.innerHTML = '⏸️ Pause Music';
+            }
+            isPlaying = !isPlaying; // Ganti status lagunya
+        });
+    </script>
+
+</audio>
+</body>
+</html>
