@@ -1,0 +1,183 @@
+/* ================= IMPORT FONT VINTAGE ================= */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ================= RESET & BASIC SETUP ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Warna dasar coklat gelap/kayu */
+    background-color: #1a120b; 
+    /* Ganti 'bgkayu.jfif' dengan nama file background lu */
+    background-image: url('darkw.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #d4c4a8;
+    overflow-x: hidden;
+}
+
+/* ================= ANIMASI SCROLL ================= */
+/* Kelas ini bikin elemen ngumpet dulu, terus muncul pas discroll */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.5s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= SECTION 1: HERO (PALING ATAS) ================= */
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+/* Kotak untuk bingkai dan foto */
+.photo-container {
+    position: relative;
+    width: 336px;
+    height: 456px;
+    margin-bottom: 30px;
+    /* Ganti 'bingkai.png' dengan nama file bingkai lu */
+    background: url('frame.png') no-repeat center center;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Foto di dalem bingkai */
+.photo-container img {
+    width: 65%; /* Atur persentase ini biar fotonya pas di lubang bingkai lu */
+    height: 70%;
+    object-fit: cover;
+    border-radius: 50%; /* Bikin fotonya oval/bulat biar ga nabrak bingkai */
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    z-index: -1; /* Biar fotonya ada di "belakang" bingkai */
+}
+
+/* Tulisan Happy Birthday */
+.title {
+    font-family: "Noto Serif", serif;
+    font-size: 6.5rem;
+    color: #fefae0; /* Emas kusam */
+    text-shadow: 
+        0 0 5px #ffd700,    /* Cahaya emas terang di pinggir huruf */
+        0 0 15px #d4af37,   /* Cahaya emas yang lebih menyebar */
+        0 0 30px #d4af37,   /* Cahaya lembut di luarnya lagi */
+        3px 3px 10px rgba(0,0,0,0.8); /* Bayangan hitam tipis biar hurufnya tetap tajem */
+}
+
+/* ================= SECTION 2: SURAT PERKAMEN ================= */
+#letter-section {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Kertas Perkamen */
+.parchment {
+    /* Ganti 'perkamen.png' dengan nama file kertas perkamen lu */
+    background: url('kertas.png') no-repeat center center;
+    background-size: 160% 160%;
+    background-color: #e8d8c3; /* Warna cadangan kalau gambar gagal load */
+    max-width: 650px;
+    width: 100%;
+    padding: 80px 60px;
+    border-radius: 5px;
+    box-shadow: 15px 15px 40px rgba(0,0,0,0.9);
+    position: relative;
+}
+
+/* Bercak tinta di sudut (Posisi diatur pakai absolute) */
+.ink-splatter {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 90px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Teks isi surat */
+.message {
+    font-family: "Noto Serif", serif; /* Font tulisan tangan */
+    font-size: 1.3rem;
+    color: #2c1e16; /* Tinta hitam pudar/coklat tua */
+    line-height: 2.2;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+/* Segel Lilin */
+.wax-seal {
+    display: block;
+    margin: 50px auto 0 auto;
+    width: 90px;
+    filter: drop-shadow(3px 5px 5px rgba(0,0,0,0.5));
+}
+
+/* ================= SECTION 3: TEASER BUKU ================= */
+#teaser {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, transparent, #050301); /* Efek gradasi ke hitam/gelap banget */
+}
+
+/* Tulisan "The Book of You..." */
+.teaser-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 3rem;
+    color: rgba(212, 196, 168, 0.3); /* Dibikin pudar/faded */
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Animasi kursor kedap-kedip buat efek "Coming Soon" */
+.blink {
+    animation: blinker 1.2s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+/* ================= TOMBOL MUSIK ================= */
+#music-btn {
+    position: fixed; /* Bikin tombolnya ngikutin layar pas discroll */
+    bottom: 30px;
+    right: 30px;
+    background-color: #d4af37; /* Warna emas vintage */
+    color: #1a120b; /* Warna gelap buat teksnya */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px; /* Bikin tombolnya bulat lonjong */
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000; /* Biar tombolnya selalu di tumpukan paling depan */
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+}
+
+#music-btn:hover {
+    background-color: #ffe55c; /* Terang dikit pas disentuh */
+    transform: scale(1.05); /* Membesar dikit efek estetik */
+}
